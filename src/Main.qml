@@ -265,10 +265,8 @@ ApplicationWindow {
                                 color: Colors.muted
                                 elide: Text.ElideRight
                             }
-                            Button {
+                            AccentButton {
                                 text: qsTr("Design  ␣")
-                                Material.background: theme.accent
-                                Material.foreground: theme.accentForeground
                                 enabled: backend.regionStart >= 0
                                 onClicked: backend.design()
                             }
@@ -352,10 +350,8 @@ ApplicationWindow {
                             RowLayout {
                                 Layout.alignment: Qt.AlignHCenter
                                 spacing: 10
-                                Button {
+                                AccentButton {
                                     text: qsTr("Use this sequence")
-                                    Material.background: theme.accent
-                                    Material.foreground: theme.accentForeground
                                     enabled: emptyPaste.text.trim().length > 0
                                     onClicked: if (backend.loadText(emptyPaste.text, "")) emptyPaste.text = ""
                                 }
@@ -449,7 +445,7 @@ ApplicationWindow {
                                 highlightFollowsCurrentItem: false
                                 boundsBehavior: Flickable.StopAtBounds
                                 ScrollBar.vertical: ScrollBar {}
-                                onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Contain)
+                                onCurrentIndexChanged: Qt.callLater(positionViewAtIndex, currentIndex, ListView.Contain)
                                 delegate: CandidateRow {
                                     width: candidates.width - 12
                                     current: index === backend.currentIndex
@@ -563,10 +559,8 @@ ApplicationWindow {
             }
         }
         footer: DialogButtonBox {
-            Button {
+            AccentButton {
                 text: qsTr("Use this sequence")
-                Material.background: theme.accent
-                Material.foreground: theme.accentForeground
                 DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
             }
             Button {
@@ -604,10 +598,8 @@ ApplicationWindow {
             wrapMode: Text.Wrap
         }
         footer: DialogButtonBox {
-            Button {
+            AccentButton {
                 text: qsTr("Save")
-                Material.background: theme.accent
-                Material.foreground: theme.accentForeground
                 onClicked: {
                     confirm.pendingAction = confirm.action
                     confirm.close()
