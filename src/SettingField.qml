@@ -51,7 +51,7 @@ RowLayout {
     Label {
         Layout.preferredWidth: 34
         text: row.unit
-        color: Palette.muted
+        color: Colors.muted
         font.pixelSize: 12
     }
 }

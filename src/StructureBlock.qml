@@ -13,14 +13,14 @@ ColumnLayout {
 
     Label {
         text: ready ? qsTr("%1 · ΔG %2 kcal/mol").arg(title).arg(Number(structure.dG).toLocaleString(Qt.locale(), 'f', 1)) : ""
-        color: Palette.muted
+        color: Colors.muted
         font.pixelSize: 12
     }
     Rectangle {
         Layout.fillWidth: true
         implicitHeight: drawing.implicitHeight + 16
         radius: Math.min(4, theme.radius)
-        color: Palette.window
+        color: Colors.window
         clip: true
         // Base pairs read left to right in every language.
         LayoutMirroring.enabled: false
@@ -38,9 +38,9 @@ ColumnLayout {
                 text: block.ready ? block.structure.drawing : ""
                 readOnly: true
                 selectByMouse: true
-                font.family: Palette.mono
+                font.family: Colors.mono
                 font.pixelSize: 12
-                color: Palette.text
+                color: Colors.text
                 selectionColor: theme.accent
                 selectedTextColor: theme.accentForeground
             }

@@ -13,13 +13,13 @@ RowLayout {
         width: 8
         height: 8
         radius: 4
-        color: Palette.status(status)
+        color: Colors.status(status)
     }
     Label {
         Layout.fillWidth: true
         text: message
         wrapMode: Text.Wrap
-        color: status === "pass" ? Palette.muted : Palette.text
+        color: status === "pass" ? Colors.muted : Colors.text
         font.pixelSize: 13
     }
 }

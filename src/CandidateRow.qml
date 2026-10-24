@@ -13,7 +13,7 @@ Rectangle {
 
     height: 34
     color: current ? Qt.rgba(Qt.color(theme.accent).r, Qt.color(theme.accent).g, Qt.color(theme.accent).b, 0.16)
-                   : mouse.containsMouse ? Palette.raised : "transparent"
+                   : mouse.containsMouse ? Colors.raised : "transparent"
     radius: Math.min(4, theme.radius)
 
     function tm(v) { return Number(v).toLocaleString(Qt.locale(), 'f', 1) }
@@ -27,14 +27,14 @@ Rectangle {
         Label {
             Layout.preferredWidth: 26
             text: row.index + 1
-            color: Palette.muted
+            color: Colors.muted
             horizontalAlignment: Text.AlignRight
         }
         Rectangle {
             width: 8
             height: 8
             radius: 4
-            color: Palette.status(row.modelData.status)
+            color: Colors.status(row.modelData.status)
         }
         Label {
             Layout.preferredWidth: 34
@@ -51,25 +51,25 @@ Rectangle {
             Layout.fillWidth: true
             Layout.preferredWidth: 220
             text: row.modelData.forward.sequence
-            font.family: Palette.mono
+            font.family: Colors.mono
             elide: Text.ElideRight
         }
         Label {
             Layout.preferredWidth: 44
             text: row.tm(row.modelData.forward.tm)
-            color: Palette.muted
+            color: Colors.muted
         }
         Label {
             Layout.fillWidth: true
             Layout.preferredWidth: 220
             text: row.modelData.reverse.sequence
-            font.family: Palette.mono
+            font.family: Colors.mono
             elide: Text.ElideRight
         }
         Label {
             Layout.preferredWidth: 44
             text: row.tm(row.modelData.reverse.tm)
-            color: Palette.muted
+            color: Colors.muted
         }
         Label {
             Layout.preferredWidth: 18

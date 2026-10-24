@@ -18,8 +18,8 @@ Rectangle {
         width: Math.min(parent.width - 48, 560)
         height: Math.min(parent.height - 48, content.implicitHeight + 48)
         radius: theme.radius
-        color: Palette.panel
-        border.color: Palette.border
+        color: Colors.panel
+        border.color: Colors.border
 
         MouseArea { anchors.fill: parent }
 
@@ -66,12 +66,12 @@ Rectangle {
                             Layout.preferredWidth: 130
                             implicitHeight: key.implicitHeight + 8
                             radius: Math.min(4, theme.radius)
-                            color: Palette.raised
+                            color: Colors.raised
                             Label {
                                 id: key
                                 anchors.centerIn: parent
                                 text: modelData[0]
-                                font.family: Palette.mono
+                                font.family: Colors.mono
                                 font.pixelSize: 13
                             }
                         }
@@ -87,7 +87,7 @@ Rectangle {
                     Layout.topMargin: 12
                     Layout.fillWidth: true
                     text: qsTr("Drag across the sequence to set the target.")
-                    color: Palette.muted
+                    color: Colors.muted
                     wrapMode: Text.Wrap
                 }
             }

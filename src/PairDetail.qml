@@ -25,7 +25,7 @@ ColumnLayout {
         Label {
             visible: detail.hasPair && pair.score > 0
             text: detail.hasPair ? qsTr("Score %1").arg(pair.score) : ""
-            color: Palette.muted
+            color: Colors.muted
             font.pixelSize: 13
         }
     }
@@ -59,7 +59,7 @@ ColumnLayout {
         visible: detail.hasPair || detail.hasPrimer
         text: qsTr("These are predictions. Confirm primers in the lab before relying on them.")
         wrapMode: Text.Wrap
-        color: Palette.muted
+        color: Colors.muted
         font.pixelSize: 12
         font.italic: true
     }

@@ -7,7 +7,7 @@ import QtQuick.Layouts
 Rectangle {
     id: pane
     implicitHeight: column.implicitHeight + 28
-    color: Palette.panel
+    color: Colors.panel
 
     function focusForward() { forward.forceActiveFocus() }
     function update() { backend.setCheckPrimers(forward.text, reverse.text) }
@@ -27,7 +27,7 @@ Rectangle {
                 Material.roundedScale: theme.radius
                 placeholderText: qsTr("Forward primer, 5′→3′")
                 text: backend.checkForward
-                font.family: Palette.mono
+                font.family: Colors.mono
                 font.pixelSize: 15
                 selectByMouse: true
                 onTextEdited: pane.update()
@@ -39,7 +39,7 @@ Rectangle {
                 Material.roundedScale: theme.radius
                 placeholderText: qsTr("Reverse primer, 5′→3′ (optional)")
                 text: backend.checkReverse
-                font.family: Palette.mono
+                font.family: Colors.mono
                 font.pixelSize: 15
                 selectByMouse: true
                 onTextEdited: pane.update()
@@ -57,7 +57,7 @@ Rectangle {
             Label {
                 visible: backend.checkReport.kind === "error"
                 text: backend.checkReport.kind === "error" ? backend.checkReport.message : ""
-                color: Palette.fail
+                color: Colors.fail
             }
         }
     }

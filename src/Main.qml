@@ -12,7 +12,7 @@ ApplicationWindow {
     minimumHeight: 620
     visible: true
     title: (backend.length > 0 ? qsTr("%1 — Primer").arg(backend.name) : "Primer") + (backend.dirty ? " •" : "")
-    color: Palette.window
+    color: Colors.window
 
     Material.theme: Material.Dark
     Material.accent: theme.accent
@@ -72,11 +72,7 @@ ApplicationWindow {
         sequence: "C"
         enabled: !win.blocked
         context: Qt.ApplicationShortcut
-        onActivated: {
-            backend.mode = win.designMode ? "check" : "design"
-            if (!win.designMode)
-                checkPane.focusForward()
-        }
+        onActivated: backend.mode = win.designMode ? "check" : "design"
     }
     Shortcut {
         sequence: "/"
@@ -148,7 +144,7 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 54
-                color: Palette.panel
+                color: Colors.panel
 
                 RowLayout {
                     anchors.fill: parent
@@ -164,21 +160,23 @@ ApplicationWindow {
                     Label {
                         Layout.fillWidth: true
                         text: backend.length > 0 ? qsTr("%1 · %2 bp").arg(backend.name).arg(win.num(backend.length, 0)) : qsTr("No template")
-                        color: Palette.muted
+                        color: Colors.muted
                         elide: Text.ElideRight
                         font.pixelSize: 14
                     }
-                    Row {
-                        spacing: 2
-                        Repeater {
-                            model: [["design", qsTr("Design")], ["check", qsTr("Check")]]
-                            delegate: Button {
-                                required property var modelData
-                                text: modelData[1]
-                                flat: backend.mode !== modelData[0]
-                                highlighted: backend.mode === modelData[0]
-                                onClicked: backend.mode = modelData[0]
-                            }
+                    TabBar {
+                        id: modeBar
+                        currentIndex: win.designMode ? 0 : 1
+                        background: null
+                        TabButton {
+                            text: qsTr("Design")
+                            width: implicitWidth + 12
+                            onClicked: backend.mode = "design"
+                        }
+                        TabButton {
+                            text: qsTr("Check")
+                            width: implicitWidth + 12
+                            onClicked: backend.mode = "check"
                         }
                     }
                     ToolSeparator {}
@@ -189,7 +187,7 @@ ApplicationWindow {
                     ToolButton { text: qsTr("Settings"); onClicked: settings.open() }
                     ToolButton { text: "?"; onClicked: win.helpVisible = true }
                 }
-                Rectangle { anchors.bottom: parent.bottom; width: parent.width; height: 1; color: Palette.border }
+                Rectangle { anchors.bottom: parent.bottom; width: parent.width; height: 1; color: Colors.border }
             }
 
             // Errors stay until dismissed or fixed.
@@ -207,7 +205,7 @@ ApplicationWindow {
                         id: errorLabel
                         Layout.fillWidth: true
                         text: backend.error
-                        color: Palette.fail
+                        color: Colors.fail
                         wrapMode: Text.Wrap
                     }
                     ToolButton { text: "✕"; onClicked: backend.dismissError() }
@@ -229,7 +227,7 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 58
                         visible: win.designMode && backend.length > 0
-                        color: Palette.panel
+                        color: Colors.panel
 
                         RowLayout {
                             anchors.fill: parent
@@ -247,7 +245,7 @@ ApplicationWindow {
                                 bottomPadding: 6
                                 text: backend.regionText
                                 placeholderText: qsTr("start..end")
-                                font.family: Palette.mono
+                                font.family: Colors.mono
                                 selectByMouse: true
                                 onAccepted: {
                                     if (backend.setRegionText(text))
@@ -264,12 +262,13 @@ ApplicationWindow {
                                       ? qsTr("%1 bp selected. Products %2–%3 bp.").arg(backend.regionEnd - backend.regionStart + 1)
                                             .arg(backend.settings.productMin).arg(backend.settings.productMax)
                                       : qsTr("Drag across the sequence, or type start..end")
-                                color: Palette.muted
+                                color: Colors.muted
                                 elide: Text.ElideRight
                             }
                             Button {
                                 text: qsTr("Design  ␣")
-                                highlighted: true
+                                Material.background: theme.accent
+                                Material.foreground: theme.accentForeground
                                 enabled: backend.regionStart >= 0
                                 onClicked: backend.design()
                             }
@@ -280,7 +279,7 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         visible: !win.designMode
                     }
-                    Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Palette.border }
+                    Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Colors.border }
 
                     // The template.
                     FocusScope {
@@ -302,8 +301,8 @@ ApplicationWindow {
                             marks: backend.marks
                             accent: theme.accent
                             accentForeground: theme.accentForeground
-                            textColor: Palette.text
-                            mutedColor: Palette.muted
+                            textColor: Colors.text
+                            mutedColor: Colors.muted
                             onSelectionEdited: function (start, end) {
                                 win.leaveField()
                                 backend.setRegion(start, end)
@@ -345,7 +344,7 @@ ApplicationWindow {
                                     Material.roundedScale: theme.radius
                                     Material.containerStyle: Material.Outlined
                                     placeholderText: qsTr("ACGT…, or a whole FASTA or GenBank record")
-                                    font.family: Palette.mono
+                                    font.family: Colors.mono
                                     wrapMode: TextEdit.WrapAnywhere
                                     selectByMouse: true
                                 }
@@ -355,7 +354,8 @@ ApplicationWindow {
                                 spacing: 10
                                 Button {
                                     text: qsTr("Use this sequence")
-                                    highlighted: true
+                                    Material.background: theme.accent
+                                    Material.foreground: theme.accentForeground
                                     enabled: emptyPaste.text.trim().length > 0
                                     onClicked: if (backend.loadText(emptyPaste.text, "")) emptyPaste.text = ""
                                 }
@@ -373,22 +373,22 @@ ApplicationWindow {
                             height: 52
                             visible: win.searchVisible
                             radius: theme.radius
-                            color: Palette.raised
-                            border.color: Palette.border
+                            color: Colors.raised
+                            border.color: Colors.border
 
                             RowLayout {
                                 anchors.fill: parent
                                 anchors.leftMargin: 14
                                 anchors.rightMargin: 8
                                 spacing: 10
-                                Label { text: "/"; color: Palette.muted; font.family: Palette.mono; font.pixelSize: 16 }
+                                Label { text: "/"; color: Colors.muted; font.family: Colors.mono; font.pixelSize: 16 }
                                 TextField {
                                     id: searchField
                                     Layout.fillWidth: true
                                     Material.containerStyle: Material.Filled
                                     background: null
                                     placeholderText: qsTr("Sequence or position")
-                                    font.family: Palette.mono
+                                    font.family: Colors.mono
                                     selectByMouse: true
                                     onTextEdited: backend.search(text)
                                     Keys.onReturnPressed: function (event) { backend.nextMatch(event.modifiers & Qt.ShiftModifier ? -1 : 1) }
@@ -397,7 +397,7 @@ ApplicationWindow {
                                 Label {
                                     text: backend.searchQuery === "" ? "" : backend.matchCount === 0 ? qsTr("No match")
                                           : qsTr("%1 of %2").arg(backend.matchIndex + 1).arg(backend.matchCount)
-                                    color: backend.matchCount === 0 ? Palette.fail : Palette.muted
+                                    color: backend.matchCount === 0 ? Colors.fail : Colors.muted
                                 }
                             }
                         }
@@ -408,13 +408,13 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 1
                         visible: win.designMode && backend.designed
-                        color: Palette.border
+                        color: Colors.border
                     }
                     Rectangle {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 250
                         visible: win.designMode && backend.designed
-                        color: Palette.panel
+                        color: Colors.panel
 
                         ColumnLayout {
                             anchors.fill: parent
@@ -433,7 +433,7 @@ ApplicationWindow {
                                     Layout.fillWidth: true
                                     text: backend.pickedCount > 0 ? qsTr("%n picked for export", "", backend.pickedCount)
                                                                   : qsTr("Enter picks a pair for export")
-                                    color: Palette.muted
+                                    color: Colors.muted
                                     horizontalAlignment: Text.AlignRight
                                 }
                             }
@@ -461,13 +461,13 @@ ApplicationWindow {
                     }
                 }
 
-                Rectangle { Layout.fillHeight: true; Layout.preferredWidth: 1; color: Palette.border }
+                Rectangle { Layout.fillHeight: true; Layout.preferredWidth: 1; color: Colors.border }
 
                 // The report for the current pair, or for the checked primers.
                 Rectangle {
                     Layout.preferredWidth: 480
                     Layout.fillHeight: true
-                    color: Palette.panel
+                    color: Colors.panel
 
                     ScrollView {
                         id: reportScroll
@@ -493,7 +493,7 @@ ApplicationWindow {
                                                 : backend.regionStart < 0 ? qsTr("Select a target, then press Space.")
                                                 : backend.designed ? qsTr("No pair to show.") : qsTr("Press Space to design pairs."))
                                              : qsTr("Type a primer to check it. Add a reverse primer to check the pair.")
-                        color: Palette.muted
+                        color: Colors.muted
                         wrapMode: Text.Wrap
                         horizontalAlignment: Text.AlignHCenter
                     }
@@ -504,8 +504,8 @@ ApplicationWindow {
             Rectangle {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 28
-                color: Palette.panel
-                Rectangle { width: parent.width; height: 1; color: Palette.border }
+                color: Colors.panel
+                Rectangle { width: parent.width; height: 1; color: Colors.border }
                 RowLayout {
                     anchors.fill: parent
                     anchors.leftMargin: 18
@@ -513,13 +513,13 @@ ApplicationWindow {
                     Label {
                         Layout.fillWidth: true
                         text: backend.message
-                        color: Palette.muted
+                        color: Colors.muted
                         font.pixelSize: 12
                         elide: Text.ElideRight
                     }
                     Label {
                         text: qsTr("Predictions — confirm in the lab · ? for keys")
-                        color: Palette.muted
+                        color: Colors.muted
                         font.pixelSize: 12
                     }
                 }
@@ -555,7 +555,7 @@ ApplicationWindow {
                 Layout.preferredHeight: 260
                 TextArea {
                     id: pasteArea
-                    font.family: Palette.mono
+                    font.family: Colors.mono
                     wrapMode: TextEdit.WrapAnywhere
                     placeholderText: qsTr("ACGT…, or a whole FASTA or GenBank record")
                     selectByMouse: true
@@ -565,7 +565,8 @@ ApplicationWindow {
         footer: DialogButtonBox {
             Button {
                 text: qsTr("Use this sequence")
-                highlighted: true
+                Material.background: theme.accent
+                Material.foreground: theme.accentForeground
                 DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
             }
             Button {
@@ -605,7 +606,8 @@ ApplicationWindow {
         footer: DialogButtonBox {
             Button {
                 text: qsTr("Save")
-                highlighted: true
+                Material.background: theme.accent
+                Material.foreground: theme.accentForeground
                 onClicked: {
                     confirm.pendingAction = confirm.action
                     confirm.close()

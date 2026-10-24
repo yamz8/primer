@@ -11,7 +11,7 @@ Rectangle {
 
     implicitHeight: column.implicitHeight + 28
     radius: theme.radius
-    color: Palette.raised
+    color: Colors.raised
     visible: ready
 
     ColumnLayout {
@@ -43,9 +43,9 @@ Rectangle {
             readOnly: true
             selectByMouse: true
             wrapMode: TextEdit.WrapAnywhere
-            font.family: Palette.mono
+            font.family: Colors.mono
             font.pixelSize: 14
-            color: Palette.text
+            color: Colors.text
             selectionColor: theme.accent
             selectedTextColor: theme.accentForeground
             LayoutMirroring.enabled: false
@@ -56,7 +56,7 @@ Rectangle {
                                .arg(report.length)
                                .arg(Number(report.gc).toLocaleString(Qt.locale(), 'f', 1))
                                .arg(Number(report.endStability).toLocaleString(Qt.locale(), 'f', 1)) : ""
-            color: Palette.muted
+            color: Colors.muted
             font.pixelSize: 12
         }
         Repeater {

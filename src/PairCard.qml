@@ -10,7 +10,7 @@ Rectangle {
 
     implicitHeight: column.implicitHeight + 28
     radius: theme.radius
-    color: Palette.raised
+    color: Colors.raised
     visible: ready
 
     ColumnLayout {

@@ -7,13 +7,13 @@ Rectangle {
     implicitHeight: chipLabel.implicitHeight + 4
     radius: Math.min(4, theme.radius)
     color: "transparent"
-    border.color: Palette.status(status)
+    border.color: Colors.status(status)
 
     Label {
         id: chipLabel
         anchors.centerIn: parent
         text: status === "pass" ? qsTr("Pass") : status === "warn" ? qsTr("Warn") : qsTr("Fail")
-        color: Palette.status(status)
+        color: Colors.status(status)
         font.pixelSize: 11
         font.bold: true
     }

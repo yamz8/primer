@@ -11,8 +11,8 @@ Drawer {
     Material.roundedScale: theme.radius
 
     background: Rectangle {
-        color: Palette.panel
-        Rectangle { width: 1; height: parent.height; color: Palette.border }
+        color: Colors.panel
+        Rectangle { width: 1; height: parent.height; color: Colors.border }
     }
 
     ScrollView {
@@ -28,7 +28,7 @@ Drawer {
                 font.pixelSize: 12
                 font.bold: true
                 font.capitalization: Font.AllUppercase
-                color: Palette.muted
+                color: Colors.muted
             }
 
             Item { Layout.preferredHeight: 4 }
@@ -82,7 +82,7 @@ Drawer {
                     Layout.bottomMargin: 20
                     text: qsTr("Tm uses SantaLucia (1998) nearest-neighbor values with Mg²⁺ folded into a sodium equivalent. Structures are scored at 37 °C.")
                     wrapMode: Text.Wrap
-                    color: Palette.muted
+                    color: Colors.muted
                     font.pixelSize: 12
                 }
             }

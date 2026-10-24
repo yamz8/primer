@@ -11,7 +11,7 @@
         <file alias="CandidateRow.qml">CandidateRow.qml</file>
         <file alias="CheckPane.qml">CheckPane.qml</file>
         <file alias="HelpOverlay.qml">HelpOverlay.qml</file>
-        <file alias="Palette.qml">Palette.qml</file>
+        <file alias="Colors.qml">Colors.qml</file>
         <file alias="StatusChip.qml">StatusChip.qml</file>
         <file alias="qmldir">qmldir</file>
         <file alias="i18n/en.json">i18n/en.json</file>
