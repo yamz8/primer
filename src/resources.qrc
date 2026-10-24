@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="Main.qml">Main.qml</file>
+        <file alias="PrimerCard.qml">PrimerCard.qml</file>
+        <file alias="PairCard.qml">PairCard.qml</file>
+        <file alias="PairDetail.qml">PairDetail.qml</file>
+        <file alias="CheckRow.qml">CheckRow.qml</file>
+        <file alias="StructureBlock.qml">StructureBlock.qml</file>
+        <file alias="SettingsPanel.qml">SettingsPanel.qml</file>
+        <file alias="SettingField.qml">SettingField.qml</file>
+        <file alias="CandidateRow.qml">CandidateRow.qml</file>
+        <file alias="CheckPane.qml">CheckPane.qml</file>
+        <file alias="HelpOverlay.qml">HelpOverlay.qml</file>
+        <file alias="Palette.qml">Palette.qml</file>
+        <file alias="StatusChip.qml">StatusChip.qml</file>
+        <file alias="qmldir">qmldir</file>
+        <file alias="i18n/en.json">i18n/en.json</file>
+        <file alias="i18n/da.json">i18n/da.json</file>
+        <file alias="skill/SKILL.md">skill/SKILL.md</file>
+    </qresource>
+</RCC>

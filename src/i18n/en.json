@@ -1,0 +1,7 @@
+{
+  "%n pairs": { "one": "%n pair", "other": "%n pairs" },
+  "%n picked for export": { "one": "%n picked for export", "other": "%n picked for export" },
+  "%n ambiguous bases": { "one": "%n ambiguous base", "other": "%n ambiguous bases" },
+  "Not unique: binds %n sites": { "one": "Not unique: binds %n site", "other": "Not unique: binds %n sites" },
+  "%n products on the template": { "one": "%n product on the template", "other": "%n products on the template" }
+}
