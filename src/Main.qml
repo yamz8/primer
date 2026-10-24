@@ -260,7 +260,7 @@ ApplicationWindow {
                                 Layout.fillWidth: true
                                 text: backend.regionStart >= 0
                                       ? qsTr("%1 bp selected. Products %2–%3 bp.").arg(backend.regionEnd - backend.regionStart + 1)
-                                            .arg(backend.settings.productMin).arg(backend.settings.productMax)
+                                            .arg(win.num(backend.settings.productMin, 0)).arg(win.num(backend.settings.productMax, 0))
                                       : qsTr("Drag across the sequence, or type start..end")
                                 color: Colors.muted
                                 elide: Text.ElideRight
