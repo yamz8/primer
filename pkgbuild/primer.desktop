@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Primer
+Name[da]=Primer
+Comment=Design and check PCR primers
+Comment[da]=Design og tjek PCR-primere
+Exec=primer open %f
+Icon=primer
+Terminal=false
+Categories=Science;Biology;
+MimeType=chemical/seq-na-fasta;chemical/seq-na-genbank;
+Keywords=PCR;primer;oligo;DNA;Tm;
+StartupWMClass=primer
