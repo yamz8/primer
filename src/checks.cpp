@@ -440,10 +440,11 @@ QString describe(const Check &c) {
     case Check::TmDifference:
         return tr("Tm difference %1 °C (max %2)").arg(num(c.value), num(c.limit));
     case Check::Product:
-        if (c.limit2 == 0 || c.value == 0)
+        // value is the intended product's size, limit the number of products.
+        if (c.limit == 0 || c.value == 0)
             return tr("No product on the template");
-        if (c.limit2 > 1)
-            return QCoreApplication::translate("Checks", "%n products on the template", nullptr, int(c.limit2));
+        if (c.limit > 1)
+            return QCoreApplication::translate("Checks", "%n products on the template", nullptr, int(c.limit));
         return tr("Product %1 bp").arg(int(c.value));
     }
     return {};

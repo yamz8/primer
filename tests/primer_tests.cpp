@@ -235,6 +235,9 @@ private slots:
             QVERIFY(p.productSize >= s.productMin && p.productSize <= s.productMax);
             QVERIFY(p.tmDifference <= s.tmDifferenceMax + 1e-9);
             QCOMPARE(p.products, 1);
+            for (const auto &c : p.checks)
+                if (c.kind == checks::Check::Product)
+                    QCOMPARE(checks::describe(c), QString("Product %1 bp").arg(p.productSize));
             for (const auto *r : {&p.forward, &p.reverse}) {
                 QVERIFY(r->tm >= s.tmMin && r->tm <= s.tmMax);
                 QVERIFY(r->gc >= s.gcMin && r->gc <= s.gcMax);
